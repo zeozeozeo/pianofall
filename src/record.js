@@ -116,6 +116,7 @@ function importFromFile(file) {
 function playAction() {
     if (recordingActions.length === 0) {
         isPlayingBack = false;
+        releaseAllKeys();
         return;
     }
     var action = recordingActions[0];
