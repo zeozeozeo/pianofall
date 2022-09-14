@@ -85,6 +85,10 @@ function importRecording() {
 }
 
 function importFromFile(file) {
+    if (isPlayingBack) {
+        Swal.fire("Cannot import a song while playing an another song");
+        return;
+    }
     // read the file
     var reader = new FileReader();
 
