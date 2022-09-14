@@ -47,7 +47,7 @@ let currentInstrumentString;
 NProgress.start(); // start progress bar
 var samples = SampleLibrary.load({
     instruments: INSTRUMENTS,
-    baseUrl: "/pianofall/samples",
+    baseUrl: "https://zeozeozeo.github.io/pianofall/samples/",
 });
 
 // called when all samples are loaded
