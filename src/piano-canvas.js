@@ -1,6 +1,7 @@
 let canvas, ctx, canvasDiv, pianoUiDiv;
 let canvasNotes = [];
-const NOTE_SPEED = 2; // px per frame
+let lastFrameTime = 0;
+const NOTE_SPEED = 0.2; // px per frame * dt
 
 document.addEventListener("DOMContentLoaded", () => {
     pianoUiDiv = document.getElementById("piano-ui");
@@ -19,8 +20,9 @@ function clearCanvas() {
 }
 
 // draw loop
-function drawCanvas() {
+function drawCanvas(time) {
     clearCanvas(); // clear previous frame
+    var dt = time - lastFrameTime;
 
     for (var i = 0; i < canvasNotes.length; i++) {
         var note = canvasNotes[i];
@@ -33,16 +35,17 @@ function drawCanvas() {
         }
 
         if (note.doGrow) {
-            note.height += NOTE_SPEED;
+            note.height += NOTE_SPEED * dt;
             note.y = canvas.height - note.height;
         } else {
-            note.y -= NOTE_SPEED;
+            note.y -= NOTE_SPEED * dt;
         }
 
         ctx.fillStyle = note.color;
         ctx.fillRect(note.x, note.y, note.width, note.height);
     }
 
+    lastFrameTime = time;
     window.requestAnimationFrame(drawCanvas);
 }
 
